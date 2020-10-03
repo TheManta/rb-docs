@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="Description" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/style.min.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+    <link rel="stylesheet" href="/_styles/prism-vsc-dark-plus.css" />
+    <link rel="stylesheet" href="/_styles/custom.css" />
+  </head>
+
+  <body>
+    <div id="app"></div>
+
+    <script>
+      var chatUrl = 'https://discord.gg/YphqAZm';
+      var repoUrl = 'https://github.com/TheManta/rb-docs';
+
+      // Hack in social menu to sidestep Markdown image relative/absolute path bug
+      var socialMenu = [
+        '<div class="social-menu">',
+          '<a href="' + chatUrl + '"><img src="/_images/discord.png" /></a>',
+          '<a href="' + repoUrl + '"><img src="/_images/github.png" /></a>',
+        '</div>',
+      ].join(' ');
+
+      window.$docsify = {
+        name: '<span>RebornBuddy Docs</span>' + socialMenu,
+        loadSidebar: '_sidebar.md',
+        subMaxLevel: 2,
+        auto2top: true,
+        notFoundPage: '_404.md',
+        relativePath: true,
+        formatUpdated: '{YYYY}.{MM}.{DD}',
+        darklightTheme: {
+          defaultTheme: 'dark',
+        },
+        search: {
+          maxAge: 1800000, // 30 minute search cache
+          placeholder: '🔍 Search',
+          noData: '⛔ No search results.',
+          hideOtherSidebarContent: false,
+        },
+        plugins: [
+          function(hook, vm) {
+            hook.beforeEach((content) => {
+              var editUrl = repoUrl + 'blob/master/docs/' + vm.route.file;
+
+              return [
+                '<div class="edit-page">',
+                  '<span>Updated: {docsify-updated}</span><br />',
+                  '<a href="' + editUrl + '">📝Edit</a>',
+                '</div>',
+              '\n\n'].join('') + content;
+            })
+          },
+        ],
+      };
+    </script>
+    <!-- Main -->
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+
+    <!-- Themes -->
+    <script src="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/index.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+    
+
+    <!-- Syntax -->
+    <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script>
+    <script src="//unpkg.com/mermaid/dist/mermaid.js"></script>
+    <script src="//unpkg.com/docsify-mermaid@latest/dist/docsify-mermaid.js"></script>
+    <script>
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <!-- Language Highlighting-->
+    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-diff.min.js"></script>
+
+
+  </body>
+</html>

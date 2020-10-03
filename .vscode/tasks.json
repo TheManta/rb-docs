@@ -1,0 +1,31 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Docsify",
+      "type": "shell",
+      "command": "docsify",
+      "args": ["serve", "docs"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Browser",
+      "type": "shell",
+      "command": "start",
+      "args": ["http://localhost:3000/"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Run",
+      "dependsOrder": "parallel",
+      "dependsOn": ["Browser", "Docsify"],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

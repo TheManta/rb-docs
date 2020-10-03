@@ -1,0 +1,6 @@
+* [Home](/)
+* [User Guide](/users/)
+* [Developers](/devs/)
+* [Contributing](/contributing.md)
+* [Downloads](/downloads.md)
+* [Credits](/credits.md)

@@ -1,0 +1,42 @@
+:root {
+  /* Recolor docsify-tabs to be darklight theme friendly */
+  --docsifytabs-border-color: #a5a5a57f;
+  --docsifytabs-tab-background: inherit;
+  --docsifytabs-tab-highlight-color: #42b983;
+  --docsifytabs-tab-highlight-px: 4px;
+}
+
+/* Hide theme changer */
+#docsify-darklight-theme {
+  visibility: hidden;
+  position: absolute;
+}
+
+/* Limit content width on huge screens */
+p {
+  max-width: 70ch;
+}
+
+/* Replace "clear search" button for better readability */
+.search .clear-button {
+  visibility: hidden;
+}
+.search .clear-button:before {
+  content: "❌";
+  visibility: visible;
+  position: absolute;
+}
+
+.search input {
+  border-color: #a5a5a57f !important;
+}
+/* Add spacing around social menu */
+.social-menu {
+  margin: 1ch;
+  text-align: center;
+}
+
+.edit-page {
+  text-align: right;
+  margin-bottom: 0;
+}
