@@ -12,31 +12,32 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/style.min.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
-    <link rel="stylesheet" href="/_styles/prism-vsc-dark-plus.css" />
-    <link rel="stylesheet" href="/_styles/custom.css" />
+    <link rel="stylesheet" href="_styles/prism-vsc-dark-plus.css" />
+    <link rel="stylesheet" href="_styles/custom.css" />
   </head>
 
   <body>
     <div id="app"></div>
 
     <script>
-      var chatUrl = 'https://discord.gg/YphqAZm';
-      var repoUrl = 'https://github.com/TheManta/rb-docs';
+      var chatUrl = new URL('https://discord.gg/YphqAZm');
+      var repoUrl = new URL('https://github.com/TheManta/rb-docs');
 
       // Hack in social menu to sidestep Markdown image relative/absolute path bug
+      // There are no plugin hooks for sidebars(?), so this is the best we get
       var socialMenu = [
         '<div class="social-menu">',
-          '<a href="' + chatUrl + '"><img src="/_images/discord.png" /></a>',
-          '<a href="' + repoUrl + '"><img src="/_images/github.png" /></a>',
+          '<a href="' + chatUrl + '"><img src="_images/discord.png" /></a>',
+          '<a href="' + repoUrl + '"><img src="_images/github.png" /></a>',
         '</div>',
       ].join(' ');
 
       window.$docsify = {
         name: '<span>RebornBuddy Docs</span>' + socialMenu,
+        notFoundPage: '_404.md',
         loadSidebar: '_sidebar.md',
         subMaxLevel: 2,
         auto2top: true,
-        notFoundPage: '_404.md',
         relativePath: true,
         formatUpdated: '{YYYY}.{MM}.{DD}',
         darklightTheme: {
@@ -51,12 +52,13 @@
         plugins: [
           function(hook, vm) {
             hook.beforeEach((content) => {
-              var editUrl = repoUrl + 'blob/master/docs/' + vm.route.file;
+              var editUrl = new URL(repoUrl + '/blob/master/docs/' + vm.route.file);
 
-              return [
+              // Newlines ensure HTML isn't touching Markdown for proper rendering
+              return ['\n\n',
                 '<div class="edit-page">',
                   '<span>Updated: {docsify-updated}</span><br />',
-                  '<a href="' + editUrl + '">📝Edit</a>',
+                  '<a href="' + editUrl + '">📝 Edit</a>',
                 '</div>',
               '\n\n'].join('') + content;
             })
